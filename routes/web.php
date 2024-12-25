@@ -14,4 +14,8 @@ Route::middleware('auth')->group(function () {
     Route::resource('personal_data', PersonalDataController::class);
 });
 
+Route::middleware('auth')->group(function () {
+    Route::get('/dashboard', [JobVacancyController::class, 'dashboard'])->name('dashboard');
+});
+
 require __DIR__ . '/auth.php';
