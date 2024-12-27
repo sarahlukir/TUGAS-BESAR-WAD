@@ -18,4 +18,6 @@ Route::middleware('auth')->group(function () {
     Route::get('/dashboard', [JobVacancyController::class, 'dashboard'])->name('dashboard');
 });
 
+Route::resource('users', UserController::class);
+
 require __DIR__ . '/auth.php';
