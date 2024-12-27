@@ -2,21 +2,19 @@
 
 namespace App\Models;
 
-use App\Models\User;
 use Illuminate\Database\Eloquent\Model;
 
-class Company extends Model
+class JobVacancy extends Model
 {
-    protected $fillable = [
-        'name',
-        'address',
-        'description',
-        'user_id',
-        'status', // pending, approved, rejected
-    ];
+    protected $fillable = ['position', 'description', 'qualifications', 'salary', 'location', 'company_id'];
 
-    public function user()
+    public function company()
     {
-        return $this->belongsTo(User::class);
+        return $this->belongsTo(Company::class);
+    }
+
+    public function applications()
+    {
+        return $this->hasMany(Application::class, 'job_id');
     }
 }
