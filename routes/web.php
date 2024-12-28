@@ -30,8 +30,6 @@ Route::middleware('auth')->group(function () {
     Route::delete('/applications/{id}', [ApplicationController::class, 'destroy'])->name('applications.destroy');
     Route::get('applications/{id}', [ApplicationController::class, 'show'])->name('applications.show');
 
-    Route::get('/job-vacancies/{id}', [JobVacancyController::class, 'show'])->name('job-vacancies.show');
-    Route::put('applications/{application}/updateStatus', [ApplicationController::class, 'updateStatus'])->name('applications.updateStatus');
 
     Route::get('/dashboard', [JobVacancyController::class, 'dashboard'])->name('dashboard');
     Route::get('/recomendation', [JobVacancyController::class, 'recomendation'])->name('recomendation');
