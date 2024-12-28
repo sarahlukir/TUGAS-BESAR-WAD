@@ -44,7 +44,7 @@
                     <x-nav-link :href="route('dashboard')" :active="request()->routeIs('dashboard')">
                         {{ __('Dashboard') }}
                     </x-nav-link>
-                    <x-nav-link :href="route('dashboard')" :active="false">
+                    <x-nav-link :href="route('recomendation')" :active="request()->routeIs('recomendation')">
                         {{ __('Rekomendasi') }}
                     </x-nav-link>
                     @if (auth()->user()->role === 'employee')
@@ -93,6 +93,11 @@
                                 {{ __('Admin Panel') }}
                             </x-dropdown-link>
                         @else
+                            @if (Auth::user()->company)
+                                <x-dropdown-link :href="route('companies.index')">
+                                    {{ __('Perusahaan') }}
+                                </x-dropdown-link>
+                            @endif
                             <x-dropdown-link :href="route('applications.index')">
                                 {{ __('Lamaran') }}
                             </x-dropdown-link>
