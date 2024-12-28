@@ -6,7 +6,6 @@
                 <!-- Logo -->
                 <div class="flex shrink-0 items-center">
                     <a href="{{ route('dashboard') }}">
-                        <?xml version="1.0" encoding="UTF-8"?>
                         <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="97px"
                             height="36px" viewBox="0 0 97 36" version="1.1">
                             <g id="surface1">
@@ -45,6 +44,23 @@
                     <x-nav-link :href="route('dashboard')" :active="request()->routeIs('dashboard')">
                         {{ __('Dashboard') }}
                     </x-nav-link>
+                    <x-nav-link :href="route('dashboard')" :active="false">
+                        {{ __('Rekomendasi') }}
+                    </x-nav-link>
+                    @if (auth()->user()->role === 'employee')
+                        <x-nav-link :href="route('companies.index')" :active="request()->routeIs('companies.index')">
+                            {{ __('Kelola Perusahaan') }}
+                        </x-nav-link>
+                    @elseif (auth()->user()->role === 'admin')
+                        <x-nav-link :href="route('admin.companies.index')" :active="request()->routeIs('admin.companies.index')">
+                            {{ __('Admin Panel') }}
+                        </x-nav-link>
+                    @else
+                        <x-nav-link :href="route('companies.create')" :active="request()->routeIs('companies.create')">
+                            {{ __('Daftarkan Perusahaanmu!') }}
+                        </x-nav-link>
+                    @endif
+
                 </div>
             </div>
 
@@ -68,8 +84,24 @@
                     </x-slot>
 
                     <x-slot name="content">
+                        @if (auth()->user()->role === 'employee')
+                            <x-dropdown-link :href="route('companies.index')">
+                                {{ __('Employee Panel') }}
+                            </x-dropdown-link>
+                        @elseif (auth()->user()->role === 'admin')
+                            <x-dropdown-link :href="route('admin.companies.index')">
+                                {{ __('Admin Panel') }}
+                            </x-dropdown-link>
+                        @else
+                            <x-dropdown-link :href="route('applications.index')">
+                                {{ __('Lamaran') }}
+                            </x-dropdown-link>
+                            <x-dropdown-link :href="route('personal_data.index')">
+                                {{ __('Pengalaman') }}
+                            </x-dropdown-link>
+                        @endif
                         <x-dropdown-link :href="route('profile.edit')">
-                            {{ __('Profile') }}
+                            {{ __('Profil') }}
                         </x-dropdown-link>
 
                         <!-- Authentication -->
@@ -79,7 +111,7 @@
                             <x-dropdown-link :href="route('logout')"
                                 onclick="event.preventDefault();
                                                 this.closest('form').submit();">
-                                {{ __('Log Out') }}
+                                {{ __('Keluar') }}
                             </x-dropdown-link>
                         </form>
                     </x-slot>
@@ -107,6 +139,12 @@
         <div class="space-y-1 pb-3 pt-2">
             <x-responsive-nav-link :href="route('dashboard')" :active="request()->routeIs('dashboard')">
                 {{ __('Dashboard') }}
+            </x-responsive-nav-link>
+            <x-responsive-nav-link :href="route('dashboard')" :active="request()->routeIs('dashboard')">
+                {{ __('Daftarkan Perusahaanmu!') }}
+            </x-responsive-nav-link>
+            <x-responsive-nav-link :href="route('dashboard')" :active="request()->routeIs('dashboard')">
+                {{ __('Rekomendasi Pekerjaan') }}
             </x-responsive-nav-link>
         </div>
 
