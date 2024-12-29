@@ -2,21 +2,30 @@
 
 namespace App\Models;
 
+use Illuminate\Database\Eloquent\Factories\HasFactory;
+use App\Models\User;
 use Illuminate\Database\Eloquent\Model;
 
-class JobVacancy extends Model
+class Company extends Model
 {
+    use HasFactory;
+
     protected $fillable = [
-        'position',
+        'logo',
+        'name',
+        'address',
         'description',
-        'qualifications',
-        'salary',
-        'location',
-        'company_id',
+        'user_id',
+        'status', // pending, approved, rejected
     ];
 
-    public function company()
+    public function user()
     {
-        return $this->belongsTo(Company::class);
+        return $this->belongsTo(User::class);
+    }
+
+    public function jobVacancies()
+    {
+        return $this->hasMany(JobVacancy::class);
     }
 }

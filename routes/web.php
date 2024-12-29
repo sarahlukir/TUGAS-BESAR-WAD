@@ -8,9 +8,7 @@ use App\Http\Controllers\JobVacancyController;
 use App\Http\Controllers\ApplicationController;
 use App\Http\Controllers\PersonalDataController;
 
-Route::get('/', function () {
-    return view('welcome');
-});
+Route::get('/', [JobVacancyController::class, 'dashboard'])->name('dashboard');
 
 Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
@@ -30,8 +28,9 @@ Route::middleware('auth')->group(function () {
     Route::delete('/applications/{id}', [ApplicationController::class, 'destroy'])->name('applications.destroy');
     Route::get('applications/{id}', [ApplicationController::class, 'show'])->name('applications.show');
 
+    Route::get('/job-vacancies/{id}', [JobVacancyController::class, 'show'])->name('job-vacancies.show');
+    Route::put('applications/{application}/updateStatus', [ApplicationController::class, 'updateStatus'])->name('applications.updateStatus');
 
-    Route::get('/dashboard', [JobVacancyController::class, 'dashboard'])->name('dashboard');
     Route::get('/recomendation', [JobVacancyController::class, 'recomendation'])->name('recomendation');
     Route::resource('personal_data', PersonalDataController::class);
 
@@ -50,7 +49,5 @@ Route::middleware('auth')->group(function () {
         Route::post('/admin/companies/{company}/status', [CompanyController::class, 'updateStatus'])->name('admin.companies.updateStatus');
     });
 });
-
-Route::resource('users', UserController::class);
 
 require __DIR__ . '/auth.php';

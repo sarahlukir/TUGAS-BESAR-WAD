@@ -100,6 +100,7 @@
             class="fixed left-0 top-0 z-40 h-screen w-64 -translate-x-full transition-transform sm:translate-x-0"
             aria-label="Sidebar">
             <div class="h-full overflow-y-auto bg-sky-600 px-3 py-4">
+                <?xml version="1.0" encoding="UTF-8"?>
                 <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="97px"
                     height="36px" viewBox="0 0 97 36" version="1.1" class="mx-auto">
                     <g id="surface1">
