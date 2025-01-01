@@ -119,33 +119,39 @@
     </div>
 
     <script>
-        function openModal(element) {
-            const jobId = element.getAttribute('data-id');
+    function openModal(element) {
+    const jobId = element.getAttribute('data-id');
+    const userRole = "{{ auth()->check() ? auth()->user()->role : '' }}";
+    fetch(`/job-vacancies/${jobId}`)
+        .then(response => response.json())
+        .then(job => {
+                // Isi data di modal
+                document.getElementById('modal-title').innerText = job.position;
+                document.getElementById('modal-qualifications').innerText = job.qualifications;
+                document.getElementById('modal-salary').innerText = `Rp ${job.salary.toLocaleString('id-ID')}`;
+                document.getElementById('modal-location').innerText = job.location;
+                document.getElementById('modal-company-logo').src = `{{ asset('storage/') }}/${job.company.logo}`;
+                document.getElementById('modal-company-logo').alt = `${job.company.name} logo`;
 
-            fetch(`/job-vacancies/${jobId}`)
-                .then(response => response.json())
-                .then(job => {
-                    // Isi data di modal
-                    document.getElementById('modal-title').innerText = job.position;
-                    document.getElementById('modal-qualifications').innerText = job.qualifications;
-                    document.getElementById('modal-salary').innerText = `Rp ${job.salary.toLocaleString('id-ID')}`;
-                    document.getElementById('modal-location').innerText = job.location;
-                    document.getElementById('modal-company-logo').src = `{{ asset('storage/') }}/${job.company.logo}`;
-                    document.getElementById('modal-company-logo').alt = `${job.company.name} logo`;
-
-                    // Perbarui tombol "Apply Now"
-                    const applyNowBtn = document.getElementById('apply-now-btn');
+                // Perbarui tombol "Apply Now" hanya jika user memiliki role 'employee'
+                const applyNowBtn = document.getElementById('apply-now-btn');
+                if (userRole === 'user') {
                     applyNowBtn.href = `/jobs/${jobId}/apply`;
+                    applyNowBtn.classList.remove('hidden'); // Pastikan tombol ditampilkan
+                } else {
+                    applyNowBtn.classList.add('hidden'); // Sembunyikan tombol jika bukan employee
+                }
 
-                    // Tampilkan modal
-                    const modal = document.getElementById('static-modal');
-                    modal.classList.remove('hidden');
-                    modal.classList.add('flex');
-                })
-                .catch(error => {
-                    console.error('Error fetching job details:', error);
-                });
+                // Tampilkan modal
+                const modal = document.getElementById('static-modal');
+                modal.classList.remove('hidden');
+                modal.classList.add('flex');
+            })
+            .catch(error => {
+                console.error('Error fetching job details:', error);
+            });
         }
+
 
         // Close modal function
         document.querySelectorAll('[data-modal-hide]').forEach(button => {

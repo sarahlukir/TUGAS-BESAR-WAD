@@ -4,8 +4,8 @@
 
         <!-- Detail Pekerjaan -->
         <div class="mb-6 grid grid-cols-2 rounded-lg border bg-white shadow">
-            <div class="bg-sky-600 p-4 me-8 rounded-l-lg">
-                <img class="h-36 rounded-t-lg p-8" src="{{ asset('storage/' . $job->company->logo) }}"
+            <div class="bg-sky-600 p-4 me-8 rounded-l-lg flex items-center">
+                <img class="rounded-t-lg" src="{{ asset('storage/' . $job->company->logo) }}"
                     alt="{{ $job->company->name }} logo" />
             </div>
             <div class="py-4">

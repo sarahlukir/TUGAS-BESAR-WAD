@@ -6,7 +6,6 @@
                 <!-- Logo -->
                 <div class="flex shrink-0 items-center">
                     <a href="{{ route('dashboard') }}">
-                        <?xml version="1.0" encoding="UTF-8"?>
                         <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="97px"
                             height="36px" viewBox="0 0 97 36" version="1.1">
                             <g id="surface1">

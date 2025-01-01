@@ -1,7 +1,7 @@
 <div
-    class="flex h-[32rem] w-full max-w-64 flex-col rounded-lg border border-gray-200 bg-white shadow dark:border-gray-700 dark:bg-gray-800">
-    <a href="#">
-        <img class="rounded-t-lg bg-sky-600 p-8" src="{{ asset('storage/' . $logo) }}" alt="{{ $companyName }} logo" />
+    class="flex h-[24rem] w-64 flex-col rounded-lg border border-gray-200 bg-white shadow dark:border-gray-700 dark:bg-gray-800">
+    <a class="h-[10rem] w-full bg-sky-600 items-center flex rounded-t-lg">
+        <img class="w-full h-[10rem] rounded-t-lg object-scale-down" src="{{ asset('storage/' . $logo) }}" alt="{{ $companyName }} logo" />
     </a>
     <div class="flex flex-grow flex-col px-5 pb-5">
         <p class="mt-2 text-lg font-bold text-sky-600">Rp {{ number_format($salary, 0, ',', '.') }}</p>
